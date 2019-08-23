@@ -117,6 +117,8 @@ public class ChooseAreaFragment extends Fragment {
         }
     }
 
+
+    
     /**
      * 查询选中省内所有的市，优先从数据库查询，如果没有再去服务器上查询
      */
