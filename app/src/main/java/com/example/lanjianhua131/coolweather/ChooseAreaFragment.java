@@ -134,8 +134,6 @@ public class ChooseAreaFragment extends Fragment {
             queryFromServer(address,"province");
         }
     }
-
-
     
     /**
      * 查询选中省内所有的市，优先从数据库查询，如果没有再去服务器上查询
@@ -197,7 +195,6 @@ public class ChooseAreaFragment extends Fragment {
                         Toast.makeText(getContext(), "加载失败", Toast.LENGTH_SHORT).show();
                     }
                 });
-
             }
 
             @Override

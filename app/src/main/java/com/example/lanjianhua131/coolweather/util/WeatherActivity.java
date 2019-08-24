@@ -191,7 +191,6 @@ public class WeatherActivity extends AppCompatActivity {
         }else{
             Toast.makeText(this, "获取天气信息失败", Toast.LENGTH_SHORT).show();
         }
-
     }
 
     /**
