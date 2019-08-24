@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.example.lanjianhua131.coolweather.db.City;
 import com.example.lanjianhua131.coolweather.db.County;
 import com.example.lanjianhua131.coolweather.db.Province;
+import com.example.lanjianhua131.coolweather.gson.Weather;
 import com.example.lanjianhua131.coolweather.util.HttpUtil;
 import com.example.lanjianhua131.coolweather.util.Utility;
 import com.example.lanjianhua131.coolweather.util.WeatherActivity;
@@ -27,6 +28,7 @@ import org.litepal.crud.DataSupport;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.IllegalFormatCodePointException;
 import java.util.List;
 
 import okhttp3.Call;
@@ -82,10 +84,18 @@ public class ChooseAreaFragment extends Fragment {
                     queryCounties();
                 }else if (currentLevel == LEVEL_COUNTY){
                     String weatherId = countyList.get(position).getWeatherId();
-                    Intent intent = new Intent(getActivity(), WeatherActivity.class);
-                    intent.putExtra("weather_id",weatherId);
-                    startActivity(intent);
-                    getActivity().finish();
+                    if (getActivity()instanceof MainActivity){
+                        Intent intent = new Intent(getActivity(), WeatherActivity.class);
+                        intent.putExtra("weather_id",weatherId);
+                        startActivity(intent);
+                        getActivity().finish();
+                    }else if (getActivity() instanceof WeatherActivity){
+                        WeatherActivity activity = (WeatherActivity) getActivity();
+                        activity.drawerLayout.closeDrawers();
+                        activity.swipeRefresh.setRefreshing(true);
+                        activity.requestWeather(weatherId);
+                    }
+
                 }
             }
         });
